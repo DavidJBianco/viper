@@ -247,7 +247,7 @@ class VirusTotal(Module):
         if cfg.virustotal.virustotal_has_private_key:
             response = self.vt.get_file(filehash)
             if not self._has_fail(response):
-                with open(filename, 'w') as f:
+                with open(filename, 'wb') as f:
                     f.write(response)
             else:
                 return

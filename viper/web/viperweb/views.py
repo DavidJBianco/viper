@@ -366,11 +366,11 @@ class VtDownloadView(LoginRequiredMixin, TemplateView):
 
         vt_hash = request.POST.get('vt_hash')
         tags = request.POST.get('tag_list')
-        cmd_line = 'virustotal --search {0} -d; virustotal -don {0}; store; tags -a {1}'.format(vt_hash, tags) 
+        cmd_line = 'virustotal --search {0} -d; virustotal -don {0}; store; tags -a {1}'.format(vt_hash, tags)
 
         module_results = module_cmdline(project=project, file_hash=False, cmd_line=cmd_line)
 
-        if 'Stored' in module_results:
+        if ("Successfully downloaded" in module_results) or ("already been downloaded" in module_results):
             return redirect(reverse("main-page-project", kwargs={"project": project}))
         else:
             messages.error(request, "Unable to download file {0}".format(module_results))

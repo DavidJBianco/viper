@@ -366,7 +366,7 @@ class VtDownloadView(LoginRequiredMixin, TemplateView):
 
         vt_hash = request.POST.get('vt_hash')
         tags = request.POST.get('tag_list')
-        cmd_line = 'virustotal --search {0} --download; store; tags -a {1}'.format(vt_hash, tags)
+        cmd_line = 'virustotal --search {0} -d; store; tags -a {1}'.format(vt_hash, tags)
 
         module_results = module_cmdline(project=project, file_hash=False, cmd_line=cmd_line)
 
